@@ -5,9 +5,9 @@ import './Photos.scss';
 const Photos = ({ photos }) => {
     return (
         <div className="photos-wrapper">
-            {photos && photos.map((photo) => {
+            {photos && photos.map((photo, key) => {
                return (
-                   <div className="photo" key={photo.id}>
+                   <div className="photo" key={photo.id + key}>
                        <Photo photo={photo}/>
                    </div>
                    )

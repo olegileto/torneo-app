@@ -1,7 +1,12 @@
 import { KEY } from './secret';
-import { DEFAULT_PAGE, DEFAULT_PER_PAGE, URL } from './utils';
+import {
+    DEFAULT_PAGE,
+    DEFAULT_PER_PAGE,
+    URL,
+    BAD_REQUEST_STATUS
+} from './utils';
 
-const basicAPI = `${URL}?client_id=${KEY}`;
+const basicAPI = `${URL}photos/?client_id=${KEY}`;
 
 const Api = {
     fetchPhotos: async (page, perPage) => {
@@ -11,7 +16,7 @@ const Api = {
         const response = await fetch(`${basicAPI}&per_page=${defaultPerPage}&page=${defaultPage}`);
         const data = await response.json();
 
-        if (response.status >= 400) {
+        if (response.status >= BAD_REQUEST_STATUS) {
             throw new Error(data.errors);
         }
 

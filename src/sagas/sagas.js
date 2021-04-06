@@ -1,9 +1,10 @@
-import { takeEvery } from 'redux-saga/effects';
-import { PHOTOS_FETCH_REQUESTED } from '../reducers/photosReducer';
-import { fetchPhotos } from './photosSaga';
+import { takeEvery, takeLatest } from 'redux-saga/effects';
+import {MORE_PHOTOS_FETCH_REQUESTED, PHOTOS_FETCH_REQUESTED } from '../reducers/photosReducer';
+import { fetchPhotos, moreFetchPhotos } from './photosSaga';
 
 function* sagas() {
-    yield takeEvery(PHOTOS_FETCH_REQUESTED, fetchPhotos);
+    yield takeLatest(PHOTOS_FETCH_REQUESTED, fetchPhotos);
+    yield takeEvery(MORE_PHOTOS_FETCH_REQUESTED, moreFetchPhotos)
 }
 
 export default sagas;
