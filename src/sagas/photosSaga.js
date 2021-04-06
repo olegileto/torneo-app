@@ -22,7 +22,7 @@ function* moreFetchPhotos(action) {
 
     try {
         const photos = yield call(Api.fetchPhotos, page)
-        yield delay(1000);
+        yield delay(200);
         yield put(morePhotosFetchSucceeded(photos));
     } catch (e) {
         yield put(morePhotosFetchFailed(e.message))

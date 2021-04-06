@@ -1,4 +1,8 @@
 .photos-wrapper {
-  display: flex;
-  flex-wrap: wrap;
+  width: 1320px;
+  display: grid;
+  grid-column-gap: 24px;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  align-items: start;;
+  margin: 0 auto;
 }
