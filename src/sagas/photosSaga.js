@@ -1,4 +1,4 @@
-import { call, put, delay } from 'redux-saga/effects';
+import {call, put, delay, takeLatest, takeEvery } from 'redux-saga/effects';
 import {
     photosFetchSucceeded,
     photosFetchFailed,
@@ -6,8 +6,9 @@ import {
     morePhotosFetchFailed
 } from '../actions/photosAction';
 import Api from '../helpers/serviceWorkers';
+import { MORE_PHOTOS_FETCH_REQUESTED, PHOTOS_FETCH_REQUESTED } from '../reducers/photosReducer';
 
-export function* fetchPhotos() {
+function* fetchPhotos() {
     try {
         const photos = yield call(Api.fetchPhotos);
         yield put(photosFetchSucceeded(photos));
@@ -16,9 +17,8 @@ export function* fetchPhotos() {
     }
 }
 
-export function* moreFetchPhotos(action) {
+function* moreFetchPhotos(action) {
     const { page } = action;
-    console.log('page', page);
 
     try {
         const photos = yield call(Api.fetchPhotos, page)
@@ -27,4 +27,9 @@ export function* moreFetchPhotos(action) {
     } catch (e) {
         yield put(morePhotosFetchFailed(e.message))
     }
+}
+
+export function* photosWatcherSaga() {
+    yield takeLatest(PHOTOS_FETCH_REQUESTED, fetchPhotos);
+    yield takeEvery(MORE_PHOTOS_FETCH_REQUESTED, moreFetchPhotos)
 }
