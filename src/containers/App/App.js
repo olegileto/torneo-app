@@ -7,6 +7,7 @@ import Header from '../Header/Header';
 import { throttle } from 'lodash/fp';
 import { THROTTLE } from '../../helpers/utils';
 import './App.scss';
+import MainBanner from '../../components/MainBanner/MainBanner';
 
 const App = () => {
     const photos = useSelector(getPhotos);
@@ -30,9 +31,12 @@ const App = () => {
         }
     });
 
+    const firstImage = photos && photos[0].urls.regular;
+
     return (
         <div className='app-container'>
             <Header />
+            <MainBanner firstImage={firstImage}/>
             <Photos
                 photos={photos}
                 isLoading={isLoading}
