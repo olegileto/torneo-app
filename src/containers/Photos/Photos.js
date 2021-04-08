@@ -3,7 +3,7 @@ import Photo from '../../components/Photo/Photo';
 import LoadingIcon from '../../shared/icons/LoadingIcon/LoadingIcon';
 import './Photos.scss';
 
-const Photos = ({ photos, isLoading }) => {
+const Photos = ({ photos }) => {
     return (
         <div className="photos-wrapper">
             {photos && photos.map((photo, key) => {
@@ -13,7 +13,6 @@ const Photos = ({ photos, isLoading }) => {
                    </div>
                    )
             })}
-            {isLoading && <LoadingIcon />}
         </div>
     )
 }

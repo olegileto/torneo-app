@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { morePhotosFetchRequested, photosFetchRequested } from '../../actions/photosAction';
 import { getLoadingStatus, getPhotos } from '../../selectors';
 import Photos from '../Photos/Photos';
 import Header from '../Header/Header';
-import { throttle } from 'lodash';
+import { throttle } from 'lodash/fp';
 import { THROTTLE } from '../../helpers/utils';
 import './App.scss';
 
 const App = () => {
-    const [state, setState] = useState({ page: 1 })
     const photos = useSelector(getPhotos);
     const isLoading = useSelector(getLoadingStatus);
     const dispatch = useDispatch();
+    let page = 1;
 
     useEffect(() => {
         dispatch(photosFetchRequested());
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, [dispatch])
 
-    const handleScroll = throttle((e) => {
-        const element = e.target;
-        const { page } = state;
-
-        if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+    const handleScroll = throttle(THROTTLE, () => {
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+            page++;
             dispatch(morePhotosFetchRequested(page));
-            setState({ page: page + 1 })
         }
-    }, THROTTLE);
+    });
 
     return (
-        <div className='app-container' onScroll={handleScroll}>
+        <div className='app-container'>
             <Header />
             <Photos
                 photos={photos}
