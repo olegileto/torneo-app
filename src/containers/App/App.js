@@ -24,7 +24,7 @@ const App = () => {
     }, [dispatch])
 
     const handleScroll = throttle(THROTTLE, () => {
-        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+        if ((window.innerHeight + window.pageYOffset + 400) >= (document.body.offsetHeight + 400)) {
             page++;
             dispatch(morePhotosFetchRequested(page));
         }

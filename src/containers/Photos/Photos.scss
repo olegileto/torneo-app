@@ -1,8 +1,6 @@
 .photos-wrapper {
   width: 1320px;
-  display: grid;
-  grid-column-gap: 24px;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  align-items: start;;
+  columns: 3;
+  column-gap: 24px;
   margin: 0 auto;
 }
