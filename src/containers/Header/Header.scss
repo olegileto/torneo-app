@@ -1,6 +1,6 @@
 header {
   width: 100%;
-  height: auto;
+  height: 126px;
   padding: 0 20px;
   background-color: #000;
   position: fixed;
@@ -12,6 +12,7 @@ header {
     width: 100%;
     height: auto;
     padding-top: 10px;
+    margin-bottom: 20px;
 
     .search {
       width: 70%;
