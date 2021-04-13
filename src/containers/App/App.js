@@ -31,8 +31,6 @@ const App = () => {
         }
     });
 
-    console.log('photos', photos);
-
     const firstImage = photos && photos[0].urls.regular;
 
     return (
