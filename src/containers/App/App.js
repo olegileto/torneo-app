@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { morePhotosFetchRequested, photosFetchRequested } from '../../actions/photosAction';
+import { morePhotosFetchRequested, photosFetchRequested } from '../../actions/photos';
 import { getLoadingStatus, getPhotos } from '../../selectors';
 import Photos from '../Photos/Photos';
 import Header from '../Header/Header';
@@ -30,6 +30,8 @@ const App = () => {
             dispatch(morePhotosFetchRequested(page));
         }
     });
+
+    console.log('photos', photos);
 
     const firstImage = photos && photos[0].urls.regular;
 

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import { photosReducer } from './photosReducer'
+import { photos } from './photos'
 
 export const rootReducer = combineReducers({
-    photosReducer
+    photosReducer: photos
 });

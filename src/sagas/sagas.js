@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
-import { photosWatcherSaga } from './photosSaga';
+import { photosWatcherSaga } from './photos';
 
 function* sagas() {
    yield all([
